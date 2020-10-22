@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="res/css/style.css">
+    <script>
+      $(document).ready(function(){
+        $.get("https://private-anon-848b6c4be9-wad20postit.apiary-mock.com/profiles",function(data){
+          for(i=0; i< data.length; i++){
+            var d = document.createElement('div');
+            $(d).append('<img  src='+data[i]["avatar"]+' />')
+            .append(data[i]["firstname"] + " ")
+            .append(data[i]["lastname"]+"<br>")
+            .append('<button onclick="followClicked()" class="followbutton">Follow</button>')
+            .appendTo($(".grid-container"))
+        }
+        })
+        });
+
+      function followClicked(){
+        $('.followbutton').on('click', function() {
+        $(this).text(function(i, text){
+          return text === "Follow" ? "Followed" : "Follow"
+        })
+        $(this).toggleClass('followClicked');
+});
+}
+</script>
     <title>Browse</title>
   </head>
   <body>
@@ -21,6 +45,10 @@
       </nav>
     </header>
     <section class="main-container">
+
+      <div class="grid-container">
+
+      </div>
         
     </section>
   </body>

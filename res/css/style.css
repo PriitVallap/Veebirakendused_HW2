@@ -191,7 +191,7 @@ nav div.avatar-container > div {
     padding: 10px;
 }
 
-.post .post-image img, video {
+.post img, video {
     width: 100%;
     min-height: 150px;
     max-height: 350px;

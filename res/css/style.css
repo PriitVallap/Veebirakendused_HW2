@@ -111,6 +111,22 @@ nav div.search-container > button {
 nav div.avatar-container {
     margin-right: 15px;
     text-align: right;
+    position: relative;
+    display: block;
+}
+
+nav div.avatar-container > div {
+    display: block;
+    position: inherit;
+    height: 85px;
+    box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.dropdown-content > p {
+    margin: 0;
+    padding: 0;
 }
 
 .main-container {

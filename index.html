@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="res/css/style.css">
     <title>postIt! Just Post It</title>
+    <script>
+      $(document).ready(function(){
+        $("#dropdown-content").hide();
+        $("section").click(function(){
+          $("#dropdown-content").hide(100);
+        });
+        $("#avatar-container").click(function(){
+          $("#dropdown-content").show(100);
+        });
+        // $("#name").append("Name");
+        // $("#email").append("Email");
+        $.getJSON( "https://private-anon-b75919e264-wad20postit.apiary-mock.com/users/1", function( data ) {
+            $("#name").append(data.firstname + " " + data.lastname);
+            $("#email").append(data.email);
+            $("#avatar").append(data.avatar);
+        });
+      });
+    </script>
   </head>
   <body>
     <header>
@@ -15,8 +34,14 @@
         <div class="search-container">
           <input type="text" name="search"><button type="button">Search</button>
         </div>
-        <div class="avatar-container">
-          <img src="res/images/avatar.png" class="avatar" alt="Me">
+        <div id="avatar-container" class="avatar-container">
+          <img id="avatar"src="res/images/avatar.png" class="avatar" alt="Me">
+          <div id="dropdown-content" class="dropdown-content">
+            <p id="name"></p>
+            <p id="email"></p>
+            <a href="browse.html">Browse</a> <br>
+            <a href="login.html">Logout</a>
+          </div>
         </div>
       </nav>
     </header>
@@ -76,5 +101,7 @@
       </div>
 
     </section>
+
+  
   </body>
 </html>

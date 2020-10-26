@@ -129,6 +129,20 @@ nav div.avatar-container > div {
     padding: 0;
 }
 
+nav div.avatar-container > div {
+    display: block;
+    position: inherit;
+    height: 85px;
+    box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.dropdown-content > p {
+    margin: 0;
+    padding: 0;
+}
+
 .main-container {
     width: 50%;
     min-height: 100%;
@@ -148,29 +162,43 @@ nav div.avatar-container > div {
 }
 
 .post {
-    width: 80%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 20px 20px;
+    width: 90%;
     margin: 15px auto;
+    
+
+}
+
+.post > div {
+    width: 100%;
+    padding-top: 10px;
+    background-color: white;
+    border-style: solid;
+    border-color: lightgray;
+    border-radius: 10px;
+    border-width: 1px;
     box-shadow: 0 0 15px rgba(38, 50, 56, 0.33);
-    border-radius: 5px;
+  }
+
+.post-text {
+    margin-left: 10px;
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.post-date{
+    font-size:13px;
+    margin-top:5x;
+    margin-left: 10px;
 }
 
-.post .post-author {
-    padding: 10px;
-}
 
-.post .post-author::after {
-    content: "";
-    display: block;
-    clear: both;
-}
-
-.post .post-author .post-author-info {
-    float: left;
-    position: relative;
-    width: 50%;
-}
-
-.post .post-author .post-author-info img {
+.post-author-img {
+    display: inline-block;
     width: 30px;
     height: 30px;
     border-radius: 100%;
@@ -179,19 +207,8 @@ nav div.avatar-container > div {
     margin: 5px;
 }
 
-.post .post-author .post-author-info small {
-    position: absolute;
-    top: 10px;
-    left: 35px;
-}
-
-.post .post-author .post-author-info + small {
-    float: right;
-    color: grey;
-    padding: 10px;
-}
-
-.post img, video {
+.media-image {
+    margin-top: 20px;
     width: 100%;
     min-height: 150px;
     max-height: 350px;
@@ -199,19 +216,16 @@ nav div.avatar-container > div {
     object-position: top center;
 }
 
-.post .post-title {
-    padding: 10px;
-}
-
-.post .post-title h3 {
-    display: inline;
-}
-
-.post .post-title ~ .post-actions {
-    padding: 10px;
+.media-video {
+    width: 100%;
+    min-height: 150px;
+    max-height: 350px;
+    object-fit: cover;
+    object-position: top center;
 }
 
 .like-button {
+    margin-left: 10px;
     background-image: url(../images/like.png);
     background-size: 15px;
     background-repeat: no-repeat;
@@ -219,13 +233,14 @@ nav div.avatar-container > div {
     background-color: #8a8a8a;
     width: 60px;
     height: 25px;
+    margin-bottom: 10px;
     padding-left: 23px;
     line-height: 10px;
     text-align: left;
     border: none;
 }
 
-.like-button.liked {
+.likeClicked {
     background-color: #01579b;
 }
 
@@ -276,3 +291,4 @@ nav div.avatar-container > div {
     border-radius: 5px;
     color:purple;    
 }
+

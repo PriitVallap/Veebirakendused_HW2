@@ -6,37 +6,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="res/css/style.css">
     <script>
+            $(document).ready(function(){
+        $("#dropdown-content").hide();
+        $("section").click(function(){
+          $("#dropdown-content").hide(100);
+        });
+        $("#avatar-container").click(function(){
+          $("#dropdown-content").show(100);
+        });
+        $.getJSON( "https://private-anon-b75919e264-wad20postit.apiary-mock.com/users/1", function( data ) {
+            $("#name").append(data.firstname + " " + data.lastname);
+            $("#email").append(data.email);
+            $("#avatar").append(data.avatar);
+        });
+      });
+
       $(document).ready(function(){
         $.get("https://private-anon-8af1bd47d1-wad20postit.apiary-mock.com/posts",function(data){
           for(i=0; i< data.length; i++){
             var d = document.createElement('div');
-            $(d).append('<img src='+data[i]["author"]["avatar"]+' alt="Post author">')
+            $(d).append('<img class="post-author-img" src='+data[i]["author"]["avatar"]+'>')
             .append(data[i]["author"]["firstname"] + " " + data[i]["author"]["lastname"])
-            .append(data[i]["createTime"] )
+            .append('<div class="post-date">'+data[i]["createTime"]+'</div>')
             if(data[i]["media"]==null){
               console.log("..")
+            }else if(data[i]["media"]["type"]=="image"){
+              $(d).append('<img class="media-image" src='+data[i]["media"]["url"]+' alt="">')
+            }else if(data[i]["media"]["type"]=="video"){
+              $(d).append('<video class="media-video" controls> <source src='+data[i]["media"]["url"]+'</video>')
             }
-            else if(data[i]["media"]["type"]=="image"){
-              $(d).append('<img src='+data[i]["media"]["url"]+' alt="">')
+            if(data[i]["text"] != null){
+            $(d).append('<div class="post-text">'+data[i]["text"]+"</div>")
             }
-            else if(data[i]["media"]["type"]=="video"){
-              $(d).append('<video>'+data[i]["media"]["url"]+'</video>')
-            }
-            $(d).append(data[i]["text"])
-            .append('<button type="button" name="like" class="like-button">' + data[i]["likes"]+"</button>")
+            $(d).append('<button type="button" name="like" onclick="likeClicked()" class="like-button">' + data[i]["likes"]+"</button>")
             .appendTo($(".post"))
-            console.log(d)
             }
- 
- 
+
         })
         });
  
       function likeClicked(){
         $('.like-button').on('click', function() {
-        $(this).text(function(i, text){
-          return text === "like" ? "liked" : "like"
-        })
         $(this).toggleClass('likeClicked');
 });
 }
@@ -52,9 +62,14 @@
         <div class="search-container">
           <input type="text" name="search"><button type="button">Search</button>
         </div>
-        <div class="avatar-container">
-          <img src="res/images/avatar.png" class="avatar" alt="Me">
-        </div>
+            <div id="avatar-container" class="avatar-container">
+          <img id="avatar"src="res/images/avatar.png" class="avatar" alt="Me">
+          <div id="dropdown-content" class="dropdown-content">
+            <p id="name"></p>
+            <p id="email"></p>
+            <a href="browse.html">Browse</a> <br>
+            <a href="login.html">Logout</a>
+          </div>
       </nav>
     </header>
     <section class="main-container">
